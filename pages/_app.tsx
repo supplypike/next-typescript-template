@@ -23,6 +23,52 @@ export default class extends App {
     return out;
   }
 
+  componentDidMount() {
+    const doc = document;
+    const rootEl = doc.documentElement;
+    const body = doc.body;
+    /* global ScrollReveal */
+    /// @ts-ignore
+    const sr = (window['sr'] = ScrollReveal({ mobile: false }));
+
+    rootEl.classList.remove('no-js');
+    rootEl.classList.add('js');
+
+    function revealAnimations() {
+      sr.reveal('.hero-title, .hero-paragraph, .hero-cta', {
+        duration: 1000,
+        distance: '40px',
+        easing: 'cubic-bezier(0.5, -0.01, 0, 1.005)',
+        origin: 'bottom',
+        interval: 150
+      });
+
+      sr.reveal('.feature, .pricing-table', {
+        duration: 600,
+        distance: '40px',
+        easing: 'cubic-bezier(0.5, -0.01, 0, 1.005)',
+        interval: 100,
+        origin: 'bottom',
+        viewFactor: 0.5
+      });
+
+      sr.reveal('.feature-extended-image', {
+        duration: 600,
+        scale: 0.9,
+        easing: 'cubic-bezier(0.5, -0.01, 0, 1.005)',
+        viewFactor: 0.5
+      });
+    }
+
+    window.addEventListener('load', function() {
+      body.classList.add('is-loaded');
+    });
+
+    if (body.classList.contains('has-animations')) {
+      window.addEventListener('load', revealAnimations);
+    }
+  }
+
   render() {
     const { props } = this as any;
     const { Component, pageProps } = props;

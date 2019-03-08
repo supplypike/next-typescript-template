@@ -9,7 +9,7 @@ import {
   SITE_NAME,
   SITE_TITLE
 } from '../src/constants/env';
-import '../src/styles/scss/style.scss';
+
 export default class extends Document {
   static async getInitialProps(...args) {
     const documentProps = await Document.getInitialProps(...args);
@@ -21,7 +21,7 @@ export default class extends Document {
 
   render() {
     return (
-      <html lang="ko">
+      <html lang="en_US">
         <Head>
           <meta
             name="viewport"
@@ -49,6 +49,10 @@ export default class extends Document {
           <script src="https://unpkg.com/scrollreveal@4.0.5/dist/scrollreveal.min.js" />
           <link
             href="https://fonts.googleapis.com/css?family=Heebo:400,700|Playfair+Display:700"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Hind+Vadodara:400,700|Mukta:500,700"
             rel="stylesheet"
           />
           <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find,Array.prototype.includes,String.prototype.includes,Array.prototype.findIndex,Object.entries" />
@@ -85,7 +89,8 @@ fbq('track', 'PageView'); `
             </>
           )}
         </Head>
-        <body className="is-boxed has-animations">
+        {/* <body className="is-boxed has-animations"> */}
+        <body className="is-boxed">
           <Main />
           <NextScript />
         </body>
