@@ -11,7 +11,6 @@ module.exports = api => {
           'process.env.NODE_ENV': process.env.NODE_ENV
         }
       ]
-      // ['styled-jsx/babel', { plugins: ['styled-jsx-plugin-sass'] }]
     ]
   };
 };
