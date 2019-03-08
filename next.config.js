@@ -18,8 +18,9 @@ module.exports = withTypescript(
           );
         }
         return config;
-      }
-      // cssModules: true
+      },
+      cssModules: true,
+      cssLoaderOptions: { localIdentName: '[name]__[local]__[hash:base64:5]' }
     })
   )
 );
