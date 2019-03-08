@@ -1,52 +1,31 @@
-import * as React from 'react';
-// import '../src/styles/controltower-styles/style.scss';
+/// @ts-ignore
+import styles from '../src/styles/controltower-styles/style.module.scss';
+import { classesHelper } from '../src/lib/helpers';
+import Accordion from '../src/components/Accordion';
 
-const dropboxStyle = (dropShadow: number): React.CSSProperties => {
-  return {
-    mixBlendMode: 'multiply',
-    filter: `url(#dropshadow-f-${dropShadow})`
+export default () => {
+  const classes = classesHelper(styles);
+  const dropboxStyle = (dropShadow: number): React.CSSProperties => {
+    return {
+      mixBlendMode: 'multiply',
+      filter: `url(#dropshadow-f-${dropShadow})`
+    };
   };
-};
-class Index extends React.Component {
-  private styleProps = {
-    dropboxStyle
-  };
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    const doc = document.documentElement;
 
-    doc.classList.remove('no-js');
-    doc.classList.add('js');
-
-    // Accordion component
-    const accordionEl = document.getElementsByClassName('accordion-title');
-
-    if (accordionEl.length) {
-      for (let i = 0; i < accordionEl.length; i++) {
-        accordionEl[i].addEventListener('click', function() {
-          this.parentNode.classList.toggle('is-open');
-          const panel = this.nextElementSibling;
-          if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-          } else {
-            panel.style.maxHeight = `${panel.scrollHeight}px`;
-          }
-        });
-      }
-    }
-  }
-  render() {
-    return (
-      <div className="body-wrap boxed-container">
-        <header className="site-header">
-          <div className="container">
-            <div className="site-header-inner">
-              <div className="brand header-brand">
-                <h1 className="m-0">
+  return (
+    <div className={classes('is-boxed has-animations')}>
+      <div className={classes('body-wrap boxed-container')}>
+        <header className={classes('site-header')}>
+          <div className={classes('container')}>
+            <div className={classes('site-header-inner')}>
+              <div className={classes('brand header-brand')}>
+                <h1 className={classes('m-0')}>
                   <a href="#">
-                    <img id="logo" src="/static/images/controltower/logo.png" />
+                    <img
+                      id="logo"
+                      className={classes('logo')}
+                      src="/static/images/controltower/logo.png"
+                    />
                   </a>
                 </h1>
               </div>
@@ -55,24 +34,24 @@ class Index extends React.Component {
         </header>
 
         <main>
-          <section className="hero">
-            <div className="container">
-              <div className="hero-inner">
-                <div className="hero-copy">
-                  <h1 className="hero-title mt-0">
-                    The supply chain <div className="john"> orchestration </div> platform
+          <section className={classes('hero')}>
+            <div className={classes('container')}>
+              <div className={classes('hero-inner')}>
+                <div className={classes('hero-copy')}>
+                  <h1 className={classes('hero-title mt-0')}>
+                    The supply chain <div className={classes('john')}> orchestration </div> platform
                   </h1>
-                  <p className="hero-paragraph">
+                  <p className={classes('hero-paragraph')}>
                     Unify your entire supply chain and access all your apps from a single place
                   </p>
-                  <p className="hero-cta">
-                    <a className="button button-primary button-shadow" href="#">
+                  <p className={classes('hero-cta')}>
+                    <a className={classes('button button-primary button-shadow')} href="#">
                       Sign Up Now
                     </a>
                   </p>
                 </div>
-                <div className="hero-illustration">
-                  <div className="hero-media is-revealing" style={{ perspective: 800 }}>
+                <div className={classes('hero-illustration')}>
+                  <div className={classes('hero-media is-revealing')} style={{ perspective: 800 }}>
                     <svg
                       width="985px"
                       height="auto"
@@ -1052,21 +1031,24 @@ class Index extends React.Component {
           </section>
 
           {/* PUT THE SECTION HERE */}
-          <section className="clients section">
-            <div className="container">
-              <div className="clients-inner section-inner">
-                <div className="container-sm">
-                  <ul className="list-reset mb-0">
+          <section className={classes('clients section')}>
+            <div className={classes('container')}>
+              <div className={classes('clients-inner section-inner')}>
+                <div className={classes('container-sm')}>
+                  <ul className={classes('list-reset mb-0')}>
                     <li>
-                      <span className="screen-reader-text">CaseStack</span>
-                      <img className="client" src="/static/images/controltower/cs.png" />
+                      <span className={classes('screen-reader-text')}>CaseStack</span>
+                      <img className={classes('client')} src="/static/images/controltower/cs.png" />
                     </li>
                     <li>
-                      <span className="screen-reader-text">HubGroup</span>
-                      <img className="client" src="/static/images/controltower/hub.png" />
+                      <span className={classes('screen-reader-text')}>HubGroup</span>
+                      <img
+                        className={classes('client')}
+                        src="/static/images/controltower/hub.png"
+                      />
                     </li>
                     <li>
-                      <span className="screen-reader-text">Unilever</span>
+                      <span className={classes('screen-reader-text')}>Unilever</span>
                       <svg width="132" height="40" xmlns="http://www.w3.org/2000/svg">
                         <g fill="#93A2B3" fillRule="nonzero">
                           <path d="M18.106 9.105c-1.146.384-2.394 2.07-2.037 4.63.163 1.157.757 2.72.961 3.418.362 1.223.79 3.138.223 7.12-.718 4.987-2.431 8.434-6.288 8.355-2.572 0-4.934-2.147-5.214-7.665-.289-5.212.075-7.429.857-12.024.355-2.077.496-3.836-1.072-3.528-1.997.455-2.57 1.301-3.214 3.68C1.109 17.534.9 20.673 1.036 23.816c.29 6.665 3.071 11.033 9.36 11.182 7.283.157 10.213-7.43 10.494-13.713.217-4.6.144-7.813-.498-10.265-.499-1.608-1.001-2.302-2.286-1.915zM126.935 18c-7.219 0-8.75 10.897-9.902 10.897-1.92 0-1.305-8.732-2.692-8.732-1.229-.003-1.83 1.472-1.996 2.162-.952 3.974-3.837 9.818-8.141 9.818-.996 0-2.762-.389-2.762-1.393 0-1.083 6.761-1.232 6.761-6.413 0-1.929-1.765-4.638-4.377-4.638-3.455 0-6.826 3.79-6.826 9.043 0 4.71 2.909 6.256 5.825 6.256 5.069 0 8.14-4.175 9.752-7.65.77 2.32 1.224 7.65 3.151 7.65.764 0 1.306-.387 2.228-2.469 2.298-5.18 4.526-11.132 7.599-11.132 1.149 0 .461 2.092 3.225 2.092 1.302 0 2.22-1.082 2.22-2.323 0-1.781-1.61-3.168-4.065-3.168zm-24.112 4.796c1.615 0 2.079 1.922 1.691 3.086-.385 1.157-1.765 2.476-3.913 2.86-.462-1.161-.693-5.946 2.222-5.946zM96.574 16.853c-1.727 0-2.999 1.9-2.999 4.153 0 2.045.525 2.187.525 3.598 0 1.898-1.047 4.368-2.323 4.368-2.984 0-3.737-11.138-5.533-11.138-1.047 0-1.572 1.195-1.87 2.044-1.654 4.443-3.888 9.307-8.155 9.307-.829 0-1.795-.357-2.321-.847 2.99-1.761 5.013-3.599 5.013-5.85 0-1.908-1.348-4.798-3.667-4.798-2.918 0-6.287 4.162-6.287 9.094 0 .92.153 1.553.304 2.042-.228.287-1.13.64-1.875.64-2.02 0-4.161-2.024-4.417-3.213 1.509-3.066 4.519-6.62 3.967-15.135-.207-3.24-2.001-5.24-4.244-5.112-3.06.178-5.853 6.606-5.407 13.438.086 1.337.705 5.006 1.574 6.82-1.519 2.292-3.447 2.634-4.568 2.634-1.577 0-3.968-.846-3.966-4.296 1.127-2.895.378-6.205-1.196-6.205-2.243 0-2.992 3.73-3.067 6.34-.746 1.555-1.572 2.822-2.697 2.822-3.365 0-3.661-9.87-6.135-9.87-2.02 0-5.491 6.273-6.543 6.273-.595 0-1.122-1.776-1.5-3.52-.104-.488-.204-1.079-.54-1.108-.668-.058-1.499.48-1.806 1.238-.31.748-.866 3.098-1.47 5.242-.362 1.235-1.254 3.845-1.36 4.821-.077.705.238 1.231.986 1.305 1.86.18 8.716-7.762 10.886-7.762 2.773 0 3.44 7.822 6.588 7.822 1.87 0 3.59-4.506 4.715-4.506 1.27 0 1.868 4.506 5.46 4.506 4.494 0 5.987-2.75 7.336-2.75 1.118 0 2.318 2.68 5.086 2.68 1.72 0 3.223-.494 5.015-1.625C71.129 31.436 72.397 32 73.601 32c7.4 0 9.496-6.273 11-6.273 1.345 0 1.046 6.202 4.87 6.202 5.081 0 8.529-8.388 8.529-12.9-.002-1.195-.38-2.176-1.426-2.176zm-34.579 5.993c-.446.03-.925-.437-1.119-3.466-.304-4.643.386-9.059 1.875-9.143 1.124-.073 1.63.816 1.76 2.787.287 4.365-1.69 9.775-2.516 9.822zm10.855 4.158c-.305-.36-.97-1.198-.97-2.967 0-2.255 1.565-2.958 2.245-2.958.816 0 1.495.988 1.495 2.181 0 1.41-.604 3.106-2.77 3.744z" />
@@ -1074,8 +1056,11 @@ class Index extends React.Component {
                       </svg>
                     </li>
                     <li>
-                      <span className="screen-reader-text">Sightline</span>
-                      <img className="client" src="/static/images/controltower/sightline.png" />
+                      <span className={classes('screen-reader-text')}>Sightline</span>
+                      <img
+                        className={classes('client')}
+                        src="/static/images/controltower/sightline.png"
+                      />
                     </li>
                   </ul>
                 </div>
@@ -1085,23 +1070,23 @@ class Index extends React.Component {
 
           {/* NEXT SECTION HERE */}
 
-          <section className="features-extended section">
-            <div className="container">
-              <div className="features-extended-inner section-inner has-top-divider">
-                <div className="features-extended-header text-center">
-                  <div className="container-sm">
-                    <h3 className="section-title mt-0">
+          <section className={classes('features-extended section')}>
+            <div className={classes('container')}>
+              <div className={classes('features-extended-inner section-inner has-top-divider')}>
+                <div className={classes('features-extended-header text-center')}>
+                  <div className={classes('container-sm')}>
+                    <h3 className={classes('section-title mt-0')}>
                       Are you tired of constantly jumping back and forth between apps to find the
                       info you need?{' '}
                     </h3>
-                    <p className="section-paragraph">
+                    <p className={classes('section-paragraph')}>
                       Control Tower will boost your productivity by unifying the information
                       scattered across your supply chain into a single interface{' '}
                     </p>
                   </div>
                 </div>
-                <div className="feature-extended">
-                  <div className="feature-extended-image is-revealing">
+                <div className={classes('feature-extended')}>
+                  <div className={classes('feature-extended-image is-revealing')}>
                     <svg
                       width="480"
                       height="320"
@@ -1153,11 +1138,7 @@ class Index extends React.Component {
                         <path d="M382.88 319.917c33.137 0 96.563-56.96 96.563-90.098 0-33.137-82.61-7.086-115.746-7.086-33.137 0-27.301-5.2-27.301 27.938 0 33.137 13.347 69.246 46.484 69.246z" />
                       </g>
                       <g transform="translate(57 40)">
-                        <use
-                          fill="#FFF"
-                          xlinkHref="#features-1-a"
-                          style={this.styleProps.dropboxStyle(1)}
-                        />
+                        <use fill="#FFF" xlinkHref="#features-1-a" style={dropboxStyle(1)} />
                         <use fill="#FFF" xlinkHref="#features-1-a" />
                         <path
                           d="M41.53 58.446C31.926 59.796 22.195 66.22 13 75.888v76.918c8.824-10.661 18.335-18.522 28.53-19.954 43.753-6.15 103.475 17.59 70.166 0-33.308-17.59-26.413-80.555-70.165-74.406z"
@@ -1172,13 +1153,7 @@ class Index extends React.Component {
                           fill="url(#features-1-b)"
                         />
                       </g>
-                      <circle
-                        fill="#FFF"
-                        cx="293"
-                        cy="256"
-                        r="40"
-                        style={this.styleProps.dropboxStyle(1)}
-                      />
+                      <circle fill="#FFF" cx="293" cy="256" r="40" style={dropboxStyle(1)} />
                       <circle fill="#FFF" cx="293" cy="256" r="40" />
                       <path
                         d="M261.087 181l-25.875 26.383-27.797 22.242L187 258.198l48.427.732-9.741 46.869 26.914-23.553 20.281-29.412 28.216-25.869-48.446-.373L261.087 181zm-34.554 45.736l24.909-28.358-7.837 35.816 45.929-1.117-31.869 26.36-25.067 33.697 8.631-38.989-44.945.239 30.249-27.648z"
@@ -1186,8 +1161,8 @@ class Index extends React.Component {
                       />
                     </svg>
                   </div>
-                  <div className="feature-extended-body">
-                    <h3 className="mt-0">300+ Apps</h3>
+                  <div className={classes('feature-extended-body')}>
+                    <h3 className={classes('mt-0')}>300+ Apps</h3>
                     <p>
                       Connect all your apps with your team. Control Tower stitches together your
                       TMS, WMS, Retailers, Inventory Systems, Catalogs, and more into a unified
@@ -1196,8 +1171,8 @@ class Index extends React.Component {
                     </p>
                   </div>
                 </div>
-                <div className="feature-extended">
-                  <div className="feature-extended-image is-revealing">
+                <div className={classes('feature-extended')}>
+                  <div className={classes('feature-extended-image is-revealing')}>
                     <svg
                       width="480"
                       height="320"
@@ -1242,11 +1217,7 @@ class Index extends React.Component {
                           fill="#F4F7FE"
                         />
                         <g transform="translate(70 23)">
-                          <use
-                            fill="#FFF"
-                            xlinkHref="#feature-2-a"
-                            style={this.styleProps.dropboxStyle(2)}
-                          />
+                          <use fill="#FFF" xlinkHref="#feature-2-a" style={dropboxStyle(2)} />
                           <use fill="#FFF" xlinkHref="#feature-2-a" />
                           <path
                             d="M31.625 123.62c33.137 0 18.98 85.493 18.98 52.356 0-33.137 100.43-91.442 67.293-91.442-20.35 0-77.099-9.132-117.898-8.503v47.317c10.468.547 21.558.272 31.625.272z"
@@ -1265,11 +1236,7 @@ class Index extends React.Component {
                           </g>
                           <g transform="rotate(45 209.569 65.569)">
                             <use fill="#000" filter="url(#feature-2-e)" xlinkHref="#feature-2-f" />
-                            <use
-                              fill="#FFF"
-                              xlinkHref="#feature-2-f"
-                              style={this.styleProps.dropboxStyle(2)}
-                            />
+                            <use fill="#FFF" xlinkHref="#feature-2-f" style={dropboxStyle(2)} />
                             <use fill="#FFF" xlinkHref="#feature-2-f" />
                           </g>
                           <path
@@ -1288,9 +1255,9 @@ class Index extends React.Component {
                       </g>
                     </svg>
                   </div>
-                  <div className="feature-extended-body">
-                    <h3 className="mt-0">
-                      Introducing, <span className="sketch-underline">PowerUps</span>
+                  <div className={classes('feature-extended-body')}>
+                    <h3 className={classes('mt-0')}>
+                      Introducing, <span className={classes('sketch-underline')}>PowerUps</span>
                     </h3>
                     <p>
                       {' '}
@@ -1302,8 +1269,8 @@ class Index extends React.Component {
                     </p>
                   </div>
                 </div>
-                <div className="feature-extended">
-                  <div className="feature-extended-image is-revealing">
+                <div className={classes('feature-extended')}>
+                  <div className={classes('feature-extended-image is-revealing')}>
                     <svg
                       width="480"
                       height="320"
@@ -1338,11 +1305,7 @@ class Index extends React.Component {
                           <path d="M465.727 112.934c33.137 0-5.727-64.359-5.727-97.496s-20.974-2.617-54.111-2.617S340-17.699 340 15.438s92.59 97.496 125.727 97.496zM454.277 319.202c88.366 0-106.453-64.427-106.453-152.793S0 41.866 0 166.409s365.912 152.793 454.277 152.793z" />
                         </g>
                         <g transform="translate(80 40)">
-                          <use
-                            fill="#FFF"
-                            xlinkHref="#features-3-a"
-                            style={this.styleProps.dropboxStyle(2)}
-                          />
+                          <use fill="#FFF" xlinkHref="#features-3-a" style={dropboxStyle(2)} />
                           <use fill="#FFF" xlinkHref="#features-3-a" />
                           <path
                             d="M131.594 185.875c33.137 0-88.594-28.109-88.594-61.246 0-22.23-19.932-41.805-43-52.281v75.216c33.425 22.264 106.39 38.311 131.594 38.311z"
@@ -1353,11 +1316,7 @@ class Index extends React.Component {
                             fill="#FFC570"
                           />
                         </g>
-                        <path
-                          fill="#FFF"
-                          d="M216 24h80v80h-80z"
-                          style={this.styleProps.dropboxStyle(2)}
-                        />
+                        <path fill="#FFF" d="M216 24h80v80h-80z" style={dropboxStyle(2)} />
                         <path fill="#FFF" d="M216 24h80v80h-80z" />
                         <path
                           d="M267 85h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm12-60h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm12-60h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm12-60h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm12-60h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm12-60h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4zm0 12h4v4h-4v-4z"
@@ -1374,8 +1333,8 @@ class Index extends React.Component {
                       </g>
                     </svg>
                   </div>
-                  <div className="feature-extended-body">
-                    <h3 className="mt-0">Single Pane of Glass</h3>
+                  <div className={classes('feature-extended-body')}>
+                    <h3 className={classes('mt-0')}>Single Pane of Glass</h3>
                     <p>
                       {' '}
                       Put an end to constantly playing catch-up, no more having to review data in
@@ -1389,22 +1348,22 @@ class Index extends React.Component {
             </div>
           </section>
 
-          <section className="testimonials section">
-            <div className="container">
-              <div className="testimonials-inner section-inner">
-                <h2 className="section-title mt-0 text-center">Testimonials</h2>
-                <div className="testimonials-wrap">
-                  <div className="testimonial text-center text-xs is-revealing">
-                    <div className="testimonial-inner">
-                      <div className="testimonial-main">
-                        <div className="testimonial-header">
+          <section className={classes('testimonials section')}>
+            <div className={classes('container')}>
+              <div className={classes('testimonials-inner section-inner')}>
+                <h2 className={classes('section-title mt-0 text-center')}>Testimonials</h2>
+                <div className={classes('testimonials-wrap')}>
+                  <div className={classes('testimonial text-center text-xs is-revealing')}>
+                    <div className={classes('testimonial-inner')}>
+                      <div className={classes('testimonial-main')}>
+                        <div className={classes('testimonial-header')}>
                           <img
-                            className="mb-16"
+                            className={classes('mb-16')}
                             src="/static/images/controltower/testimonial-01.png"
                             alt="Testimonial"
                           />
                         </div>
-                        <div className="testimonial-body">
+                        <div className={classes('testimonial-body')}>
                           <p>
                             {' '}
                             The first app I open every morning is Control Tower. Eveything is there-
@@ -1413,25 +1372,25 @@ class Index extends React.Component {
                           </p>
                         </div>
                       </div>
-                      <div className="testimonial-footer">
-                        <div className="testimonial-name">Robin Heiss</div>
-                        <div className="testimonial-link">
+                      <div className={classes('testimonial-footer')}>
+                        <div className={classes('testimonial-name')}>Robin Heiss</div>
+                        <div className={classes('testimonial-link')}>
                           <a href="#">sightlineretail.com</a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="testimonial text-center text-xs is-revealing">
-                    <div className="testimonial-inner">
-                      <div className="testimonial-main">
-                        <div className="testimonial-header">
+                  <div className={classes('testimonial text-center text-xs is-revealing')}>
+                    <div className={classes('testimonial-inner')}>
+                      <div className={classes('testimonial-main')}>
+                        <div className={classes('testimonial-header')}>
                           <img
-                            className="mb-16"
+                            className={classes('mb-16')}
                             src="/static/images/controltower/testimonial-02.png"
                             alt="Testimonial"
                           />
                         </div>
-                        <div className="testimonial-body">
+                        <div className={classes('testimonial-body')}>
                           <p>
                             {' '}
                             The seamless login experience across all the apps is a godsend for my
@@ -1439,31 +1398,31 @@ class Index extends React.Component {
                           </p>
                         </div>
                       </div>
-                      <div className="testimonial-footer">
-                        <div className="testimonial-name">Craig Long</div>
-                        <div className="testimonial-link">
+                      <div className={classes('testimonial-footer')}>
+                        <div className={classes('testimonial-name')}>Craig Long</div>
+                        <div className={classes('testimonial-link')}>
                           <a href="#">casestack.com</a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="testimonial text-center text-xs is-revealing">
-                    <div className="testimonial-inner">
-                      <div className="testimonial-main">
-                        <div className="testimonial-header">
+                  <div className={classes('testimonial text-center text-xs is-revealing')}>
+                    <div className={classes('testimonial-inner')}>
+                      <div className={classes('testimonial-main')}>
+                        <div className={classes('testimonial-header')}>
                           <img
-                            className="mb-16"
+                            className={classes('mb-16')}
                             src="/static/images/controltower/testimonial-03.png"
                             alt="Testimonial"
                           />
                         </div>
-                        <div className="testimonial-body">
+                        <div className={classes('testimonial-body')}>
                           <p>Quite possibly the single biggest productivity booster we've had</p>
                         </div>
                       </div>
-                      <div className="testimonial-footer">
-                        <div className="testimonial-name">Rob Blankslate</div>
-                        <div className="testimonial-link">
+                      <div className={classes('testimonial-footer')}>
+                        <div className={classes('testimonial-name')}>Rob Blankslate</div>
+                        <div className={classes('testimonial-link')}>
                           <a href="#">blankslate.com</a>
                         </div>
                       </div>
@@ -1474,22 +1433,24 @@ class Index extends React.Component {
             </div>
           </section>
 
-          <section className="pricing section">
-            <div className="container">
-              <div className="pricing-inner section-inner">
-                <h2 className="section-title mt-0 text-center">Pricing</h2>
-                <div className="pricing-tables-wrap">
-                  <div className="pricing-table is-revealing">
-                    <div className="pricing-table-inner">
-                      <div className="pricing-table-main">
-                        <div className="pricing-table-header">
-                          <div className="pricing-table-title mt-12 mb-16">Startup Plan</div>
-                          <div className="pricing-table-price pb-32">
-                            <span className="pricing-table-price-currency h3" />
-                            <span className="pricing-table-price-amount h1">Free</span>
+          <section className={classes('pricing section')}>
+            <div className={classes('container')}>
+              <div className={classes('pricing-inner section-inner')}>
+                <h2 className={classes('section-title mt-0 text-center')}>Pricing</h2>
+                <div className={classes('pricing-tables-wrap')}>
+                  <div className={classes('pricing-table is-revealing')}>
+                    <div className={classes('pricing-table-inner')}>
+                      <div className={classes('pricing-table-main')}>
+                        <div className={classes('pricing-table-header')}>
+                          <div className={classes('pricing-table-title mt-12 mb-16')}>
+                            Startup Plan
+                          </div>
+                          <div className={classes('pricing-table-price pb-32')}>
+                            <span className={classes('pricing-table-price-currency h3')} />
+                            <span className={classes('pricing-table-price-amount h1')}>Free</span>
                           </div>
                         </div>
-                        <ul className="pricing-table-features list-reset text-xs">
+                        <ul className={classes('pricing-table-features list-reset text-xs')}>
                           <li>
                             <span>✔ Unified App Management</span>
                           </li>
@@ -1501,24 +1462,35 @@ class Index extends React.Component {
                           </li>
                         </ul>
                       </div>
-                      <div className="pricing-table-cta">
-                        <a className="button button-primary button-shadow button-block" href="#">
+                      <div className={classes('pricing-table-cta')}>
+                        <a
+                          className={classes('button button-primary button-shadow button-block')}
+                          href="#"
+                        >
                           Get started
                         </a>
                       </div>
                     </div>
                   </div>
-                  <div className="pricing-table pricing-table-primary text-light is-revealing">
-                    <div className="pricing-table-inner">
-                      <div className="pricing-table-main">
-                        <div className="pricing-table-header">
-                          <div className="pricing-table-title mt-12 mb-16">Enterprise</div>
-                          <div className="pricing-table-price pb-32">
-                            <span className="pricing-table-price-currency h3" />
-                            <span className="pricing-table-price-amount h1">Contact Us</span>
+                  <div
+                    className={classes(
+                      'pricing-table pricing-table-primary text-light is-revealing'
+                    )}
+                  >
+                    <div className={classes('pricing-table-inner')}>
+                      <div className={classes('pricing-table-main')}>
+                        <div className={classes('pricing-table-header')}>
+                          <div className={classes('pricing-table-title mt-12 mb-16')}>
+                            Enterprise
+                          </div>
+                          <div className={classes('pricing-table-price pb-32')}>
+                            <span className={classes('pricing-table-price-currency h3')} />
+                            <span className={classes('pricing-table-price-amount h1')}>
+                              Contact Us
+                            </span>
                           </div>
                         </div>
-                        <ul className="pricing-table-features list-reset text-xs">
+                        <ul className={classes('pricing-table-features list-reset text-xs')}>
                           <li>
                             <span>Everything in the Free plan + </span>
                           </li>
@@ -1536,71 +1508,45 @@ class Index extends React.Component {
                           </li>
                         </ul>
                       </div>
-                      <div className="pricing-table-cta">
-                        <a className="button button-shadow button-block" href="#">
+                      <div className={classes('pricing-table-cta')}>
+                        <a className={classes('button button-shadow button-block')} href="#">
                           Talk to us
                         </a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="pricing-faqs container-sm">
-                  <ul className="accordion">
-                    <li>
-                      <div className="accordion-title">
-                        <span>Is my data safe?</span>
-                        <div className="accordion-icon" />
-                      </div>
-                      <div className="accordion-body">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam
-                        </p>
-                      </div>
+                <div className={classes('pricing-faqs container-sm')}>
+                  <ul className={classes('accordion')}>
+                    <li key={'FAQ1'}>
+                      <Accordion title={'Is my data safe?'}>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam>
+                      </Accordion>
                     </li>
-                    <li>
-                      <div className="accordion-title">
-                        <span>What if my app is not on your list?</span>
-                        <div className="accordion-icon" />
-                      </div>
-                      <div className="accordion-body">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam. Ut enim ad minim veniam semper. Lorem ipsum dolor sit amet,
-                          consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                          et dolore magna aliqua.
-                        </p>
-                      </div>
+                    <li key={'FAQ2'}>
+                      <Accordion title={'What if my app is not on your list?'}>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        Ut enim ad minim veniam semper. Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua.
+                      </Accordion>
                     </li>
-                    <li>
-                      <div className="accordion-title">
-                        <span> Can you develop a powerup for my workflow </span>
-                        <div className="accordion-icon" />
-                      </div>
-                      <div className="accordion-body">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam
-                        </p>
-                      </div>
+                    <li key={'FAQ3'}>
+                      <Accordion title={'Can you develop a powerup for my workflow'}>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                      </Accordion>
                     </li>
-                    <li>
-                      <div className="accordion-title">
-                        <span>Are you spying on me?</span>
-                        <div className="accordion-icon" />
-                      </div>
-                      <div className="accordion-body">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam. Ut enim ad minim veniam semper. Lorem ipsum dolor sit amet,
-                          consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                          et dolore magna aliqua.
-                        </p>
-                      </div>
+                    <li key={'FAQ4'}>
+                      <Accordion title={'Are you spying on me?'}>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        Ut enim ad minim veniam semper. Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua.
+                      </Accordion>
                     </li>
                   </ul>
                 </div>
@@ -1609,10 +1555,10 @@ class Index extends React.Component {
           </section>
         </main>
 
-        <footer className="site-footer">
-          <div className="container">
-            <div className="site-footer-inner">
-              <div className="brand footer-brand">
+        <footer className={classes('site-footer')}>
+          <div className={classes('container')}>
+            <div className={classes('site-footer-inner')}>
+              <div className={classes('brand footer-brand')}>
                 <a href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1645,7 +1591,7 @@ class Index extends React.Component {
                   </svg>
                 </a>
               </div>
-              <ul className="footer-links list-reset">
+              <ul className={classes('footer-links list-reset')}>
                 <li>
                   <a href="#">Contact</a>
                 </li>
@@ -1659,10 +1605,10 @@ class Index extends React.Component {
                   <a href="#">Support</a>
                 </li>
               </ul>
-              <ul className="footer-social-links list-reset">
+              <ul className={classes('footer-social-links list-reset')}>
                 <li>
                   <a href="https://www.facebook.com/SupplyPike/">
-                    <span className="screen-reader-text">Facebook</span>
+                    <span className={classes('screen-reader-text')}>Facebook</span>
                     <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z"
@@ -1673,7 +1619,7 @@ class Index extends React.Component {
                 </li>
                 <li>
                   <a href="https://twitter.com/supplypike">
-                    <span className="screen-reader-text">Twitter</span>
+                    <span className={classes('screen-reader-text')}>Twitter</span>
                     <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z"
@@ -1684,7 +1630,7 @@ class Index extends React.Component {
                 </li>
                 <li>
                   <a href="https://instagram.com/supplypike">
-                    <span className="screen-reader-text">Instagram</span>
+                    <span className={classes('screen-reader-text')}>Instagram</span>
                     <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M7.9 7v2.4H12c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C11.5 1.7 9.9 1 8 1 4.1 1 1 4.1 1 8s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H7.9z"
@@ -1694,13 +1640,13 @@ class Index extends React.Component {
                   </a>
                 </li>
               </ul>
-              <div className="footer-copyright">&copy; 2019 SupplyPike, all rights reserved</div>
+              <div className={classes('footer-copyright')}>
+                &copy; 2019 SupplyPike, all rights reserved
+              </div>
             </div>
           </div>
         </footer>
       </div>
-    );
-  }
-}
-
-export default Index;
+    </div>
+  );
+};

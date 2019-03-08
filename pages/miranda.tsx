@@ -1,38 +1,20 @@
+/// @ts-ignore
+import styles from '../src/styles/miranda-styles/style.module.scss';
 import * as React from 'react';
-import controlTowerStyles from '../src/styles/miranda-styles/style.module.scss';
-import mirandaStyles from '../src/styles/miranda-styles/style.module.scss';
-import { camelCase } from 'lodash';
+import { classesHelper } from '../src/lib/helpers';
 
-const styles = { ...controlTowerStyles, ...mirandaStyles };
-console.log(styles);
-const { 'body-wrap': bodyWrap, 'boxed-container': boxedContainer } = styles;
+export default () => {
+  const classes = classesHelper(styles);
 
-const classes = classes => {
-  const classesArr = classes.split(' ');
-  return classesArr.reduce((acc, className) => {
-    if (styles[className] === undefined) {
-      console.log(className);
-    }
-    return [...acc, styles[className]];
-  }, []);
-};
-
-const dropboxStyle = (dropShadow: number): React.CSSProperties => {
-  return {
-    mixBlendMode: 'multiply',
-    filter: `url(#dropshadow-${dropShadow})`
+  const dropboxStyle = (dropShadow: number): React.CSSProperties => {
+    return {
+      mixBlendMode: 'multiply',
+      filter: `url(#dropshadow-${dropShadow})`
+    };
   };
-};
-class Index extends React.Component {
-  private styleProps = {
-    dropboxStyle
-  };
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {}
-  render() {
-    return (
+
+  return (
+    <div className={classes('is-boxed has-animations')}>
       <div className={classes('body-wrap boxed-container')}>
         <header className={classes('site-header')}>
           <div className={classes('container')}>
@@ -40,7 +22,11 @@ class Index extends React.Component {
               <div className={classes('brand header-brand')}>
                 <h1 className={classes('m-0')}>
                   <a href="#">
-                    <img id="logo" src="/static/images/miranda/logo-white.png" />
+                    <img
+                      id="logo"
+                      className={classes('logo')}
+                      src="/static/images/miranda/logo-white.png"
+                    />
                   </a>
                 </h1>
               </div>
@@ -166,37 +152,23 @@ class Index extends React.Component {
                         </filter>
                       </defs>
                       <path fill="#F6F8FA" d="M0 220V0h200zM480 140v220H280z" />
-                      <path
-                        fill="#FFF"
-                        d="M40 50h400v260H40z"
-                        style={this.styleProps.dropboxStyle(1)}
-                      />
+                      <path fill="#FFF" d="M40 50h400v260H40z" style={dropboxStyle(1)} />
                       <path fill="#FFF" d="M40 50h400v260H40z" />
                       <path
                         fill="#FFF"
                         d="M103 176h80v160h-80zM320 24h88v88h-88z"
-                        style={this.styleProps.dropboxStyle(1)}
+                        style={dropboxStyle(1)}
                       />
                       <path fill="#FFF" d="M103 176h80v160h-80zM320 24h88v88h-88z" />
                       <path
                         fill="#FFF"
                         d="M230.97 198l16.971 16.971-16.97 16.97L214 214.972z"
-                        style={this.styleProps.dropboxStyle(1)}
+                        style={dropboxStyle(1)}
                       />
                       <path fill="#02C6A4" d="M230.97 198l16.971 16.971-16.97 16.97L214 214.972z" />
-                      <path
-                        fill="#FFF"
-                        d="M203 121H103v100z"
-                        style={this.styleProps.dropboxStyle(1)}
-                      />
+                      <path fill="#FFF" d="M203 121H103v100z" style={dropboxStyle(1)} />
                       <path fill="#84E482" d="M203 121H103v100z" />
-                      <circle
-                        fill="#FFF"
-                        cx="288"
-                        cy="166"
-                        r="32"
-                        style={this.styleProps.dropboxStyle(1)}
-                      />
+                      <circle fill="#FFF" cx="288" cy="166" r="32" style={dropboxStyle(1)} />
                       <circle
                         fill="#0EB3CE"
                         cx="288"
@@ -241,16 +213,12 @@ class Index extends React.Component {
                         </filter>
                       </defs>
                       <path fill="#F6F8FA" d="M480 140v220H280zM0 220V0h200z" />
-                      <path
-                        fill="#FFF"
-                        d="M40 50h400v260H40z"
-                        style={this.styleProps.dropboxStyle(2)}
-                      />
+                      <path fill="#FFF" d="M40 50h400v260H40z" style={dropboxStyle(2)} />
                       <path fill="#FFF" d="M40 50h400v260H40z" />
                       <path
                         fill="#FFF"
                         d="M86.225 161l62.226 62.225-62.226 62.225L24 223.225zM296 176h80v160h-80z"
-                        style={this.styleProps.dropboxStyle(2)}
+                        style={dropboxStyle(2)}
                       />
                       <path
                         fill="#FFF"
@@ -259,25 +227,15 @@ class Index extends React.Component {
                       <path
                         fill="#FFF"
                         d="M245.092 218l9.378 22.092-22.093 9.378L223 227.378z"
-                        style={this.styleProps.dropboxStyle(2)}
+                        style={dropboxStyle(2)}
                       />
                       <path
                         fill="#02C6A4"
                         d="M245.092 218l9.378 22.092-22.093 9.378L223 227.378z"
                       />
-                      <path
-                        fill="#FFF"
-                        d="M270 96H170v100z"
-                        style={this.styleProps.dropboxStyle(2)}
-                      />
+                      <path fill="#FFF" d="M270 96H170v100z" style={dropboxStyle(2)} />
                       <path fill="#84E482" d="M270 96H170v100z" />
-                      <circle
-                        fill="#FFF"
-                        cx="296"
-                        cy="177"
-                        r="32"
-                        style={this.styleProps.dropboxStyle(2)}
-                      />
+                      <circle fill="#FFF" cx="296" cy="177" r="32" style={dropboxStyle(2)} />
                       <circle
                         fill="#0EB3CE"
                         cx="296"
@@ -322,40 +280,26 @@ class Index extends React.Component {
                         </filter>
                       </defs>
                       <path fill="#F6F8FA" d="M480 140v220H280zM0 220V0h200z" />
-                      <path
-                        fill="#FFF"
-                        d="M40 50h400v260H40z"
-                        style={this.styleProps.dropboxStyle(3)}
-                      />
+                      <path fill="#FFF" d="M40 50h400v260H40z" style={dropboxStyle(3)} />
                       <path fill="#FFF" d="M40 50h400v260H40z" />
                       <path
                         fill="#FFF"
                         d="M72 248h88v88H72zM180 24h80v160h-80z"
-                        style={this.styleProps.dropboxStyle(3)}
+                        style={dropboxStyle(3)}
                       />
                       <path fill="#FFF" d="M72 248h88v88H72zM180 24h80v160h-80z" />
                       <path
                         fill="#FFF"
                         d="M277.664 261.919l-18.113 15.745-15.746-18.113 18.113-15.745z"
-                        style={this.styleProps.dropboxStyle(3)}
+                        style={dropboxStyle(3)}
                       />
                       <path
                         fill="#02C6A4"
                         d="M277.664 261.919l-18.113 15.745-15.746-18.113 18.113-15.745z"
                       />
-                      <path
-                        fill="#FFF"
-                        d="M315 129H215v100z"
-                        style={this.styleProps.dropboxStyle(3)}
-                      />
+                      <path fill="#FFF" d="M315 129H215v100z" style={dropboxStyle(3)} />
                       <path fill="#84E482" d="M315 129H215v100z" />
-                      <circle
-                        fill="#FFF"
-                        cx="318"
-                        cy="219"
-                        r="32"
-                        style={this.styleProps.dropboxStyle(3)}
-                      />
+                      <circle fill="#FFF" cx="318" cy="219" r="32" style={dropboxStyle(3)} />
                       <circle
                         fill="#0EB3CE"
                         cx="318"
@@ -674,8 +618,6 @@ class Index extends React.Component {
           </div>
         </footer>
       </div>
-    );
-  }
-}
-
-export default Index;
+    </div>
+  );
+};
