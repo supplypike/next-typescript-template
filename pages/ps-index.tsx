@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Home } from '../src/components/Home';
-import { Layout } from '../src/components/Layout';
 import '../src/styles/scss/style.scss';
 
 class Index extends React.Component {
