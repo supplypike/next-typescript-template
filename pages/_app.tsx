@@ -4,6 +4,10 @@ import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
 import { getStore } from '../src/store';
 
+// Fixes loading CSS bug https://github.com/zeit/next.js/issues/5203#issuecomment-423403716
+import '../src/styles/miranda-styles/style.module.scss';
+import '../src/styles/controltower-styles/style.module.scss';
+
 export default class extends App {
   static async getInitialProps({ Component, router, ctx }) {
     const server = !!ctx.req;
