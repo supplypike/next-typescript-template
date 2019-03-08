@@ -2,7 +2,6 @@
 import styles from '../src/styles/miranda-styles/style.module.scss';
 import * as React from 'react';
 import { classesHelper } from '../src/lib/helpers';
-
 export default () => {
   const classes = classesHelper(styles);
 
@@ -59,7 +58,13 @@ export default () => {
                     Get started now
                   </a>
                 </p>
-                <div className={classes('hero-media')}>
+                <div
+                  onClick={() => {
+                    console.log('Clicked');
+                  }}
+                  className={classes('hero-media')}
+                  style={{ pointerEvents: 'none' }}
+                >
                   <iframe
                     height="100%"
                     width="100%"
@@ -67,6 +72,7 @@ export default () => {
                     frameBorder="0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
+                    style={{ pointerEvents: 'auto' }}
                   />
                 </div>
               </div>
